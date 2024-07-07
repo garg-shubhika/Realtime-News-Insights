@@ -1,6 +1,6 @@
 # Realtime-News-Insights
 
-This project is designed to deliver a real-time news insights pipeline that constantly gathers and processes news data, extracts pertinent information, and stores it for subsequent analysis. The entire project is containerized using Docker and orchestrated with Kubernetes. Additionally, Prometheus and Grafana are integrated to monitor and visualize the system's performance.
+This project is designed to deliver a real-time news insights pipeline that constantly gathers and processes news data, extracts pertinent information, and stores it for subsequent analysis. The entire project is containerized using Docker and orchestrated with Kubernetes. Prometheus and Grafana are integrated to monitor and visualize the system's performance.
 
 ## Features
 
@@ -21,16 +21,19 @@ This project is designed to deliver a real-time news insights pipeline that cons
 - Installs Grafana using Helm.
 - Creates the config.json files with the provided JSON content in the data_ingestion/ and data_processing/ directories.
 
+```sh
 sudo chmod +x setup.sh
 ./setup.sh
+```
 
 2) Fill in the configuration files and build the two dockerfiles in the directories data_ingestion/ and data_processing/.
+```sh
    docker build data_ingestion/Dockerfile -t ingest_data:latest
    docker build data_processing/Dockerfile -t analyse_data:latest
-   
-3) Either push to dockerhub or push to minikube registry locally.
-4) Run the minikube cluster, apply the news_injest_cronjob.yaml and news_analysis_store.yaml files.
-   
+```
+4) Either push to dockerhub or push to minikube registry locally.
+5) Run the minikube cluster, apply the news_injest_cronjob.yaml and news_analysis_store.yaml files.
+```sh
    kubectl apply -f news_injest_cronjob.yaml
    kubectl apply -f news_analysis_store.yaml
-
+```
