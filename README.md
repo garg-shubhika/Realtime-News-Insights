@@ -26,7 +26,7 @@ sudo chmod +x setup.sh
 ./setup.sh
 ```
 
-2) Fill in the configuration files and build the two dockerfiles in the directories data_ingestion/ and data_processing/.
+2) Fill in the configuration files and build the two docker files in the directories data_ingestion/ and data_processing/.
 ```sh
    docker build data_ingestion/Dockerfile -t ingest_data:latest
    docker build data_processing/Dockerfile -t analyse_data:latest
@@ -37,3 +37,13 @@ sudo chmod +x setup.sh
    kubectl apply -f news_injest_cronjob.yaml
    kubectl apply -f news_analysis_store.yaml
 ```
+## Prometheus and Grafana
+
+- Some metrics like the number of requests, number of positive sentiments, etc are exposed to Prometheus.
+- Apply the prometheus_config.yaml file and check for the post in which Grafana is running.
+  ```sh
+  kubectl apply -f prometheus_config.yaml
+  kubectl get pods --wide
+```
+- Use the hostname:port to access Grafana.
+- Use the promql queries to access Prometheus data and add it to your custom dashboards.
